@@ -1,0 +1,43 @@
+@mixin btn-sm-modify {
+    font-size: 0.75rem;
+    padding: 0.1rem 1rem;
+}
+
+@mixin btn-base {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.25rem;
+}
+
+.btn-main {
+    @include btn-base();
+    background-color: #FCD94A;
+    color: black;
+    border: solid 1px #FCD94A;
+
+    &:hover {
+        opacity: 0.9;
+    }
+
+    &-s {
+        @extend .btn-main;
+        @include btn-sm-modify();
+    }
+}
+
+.btn-sec {
+    @include btn-base();
+    color: black;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+        color: #E5CC86;
+        opacity: 0.9;
+    }
+
+    &-s {
+        @extend .btn-sec;
+        @include btn-sm-modify();
+    }
+}

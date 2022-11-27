@@ -1,0 +1,94 @@
+@use "components";
+
+@mixin section-display {
+    width: 100%;
+    max-width: 992px;
+    margin: auto;
+    padding: 3rem;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+    font-family: "BinancePlex,Arial,sans-serif"!important;
+}
+
+$color-bg-info: #2B3139;
+
+header {
+    width: 100%;
+    
+    .info {
+        cursor: pointer;
+        height: auto;
+        display: flex;
+        align-items: center;
+        background-color: $color-bg-info;
+        padding: 0.6rem 2rem 0.6rem 2rem;
+
+        p {
+            margin: auto;
+            width: 1200px;
+            color: white;
+            text-align: start;
+            font-size: 14px;
+            align-items: center;
+        }
+    }
+
+    .nav {
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        padding: 0 1.5rem 0 1.5rem;
+
+        img {
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .nav-icon {
+            cursor: pointer;
+            display: flex;
+            height: 35px;
+            width: 35px;
+            text-align: center;
+            align-items: center;
+            margin: 0.5rem;
+
+            i {
+                margin: auto;
+            }
+        }
+
+        .nav-list {
+            margin-bottom: 0;
+
+            ul {
+                margin-bottom: 0;
+
+                li {
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    list-style: none;
+                    display: inline;
+                    margin-right: 1.7rem;
+                    padding: 0;
+            
+                    a {
+                        color: black;
+                        text-decoration: none;
+                        &:hover {
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+
+        .nav-list-2{
+            padding: 0;
+            text-align: end;
+        }
+    }
+}
