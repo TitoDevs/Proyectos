@@ -1,0 +1,149 @@
+// =============== NAV =============== //
+.nav {
+    height: var(--header-height);
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+
+    .nav-logo {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin: 0 12px;
+        width: 120px;
+
+        img {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            height: 30px;
+            margin: auto;
+        }
+    }
+
+    .nav-menu {
+        display: flex;
+        ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            
+            li {
+                margin: auto;
+                a {
+                    margin: 0 20px;
+                    text-decoration: none;
+                    display: flex;
+                    color: black;
+                }
+
+                a:hover {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    .nav-buttons {
+        display: flex;
+        text-align: center;
+        margin: 0 12px;
+    
+        .btn {
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 8px 14px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .btn-moon {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            margin-left: 12px;
+            font-size: 1rem;
+        }
+    }
+}
+
+// =============== BUTTONS =============== //
+.btn-social {
+    ul {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        li {
+            list-style: none;
+
+            a {
+                position: relative;
+                width: 60px;
+                height: 60px;
+                display: block;
+                text-align: center;
+                margin: 0 10px;
+                border-radius: 50%;
+                padding: 6px;
+                box-sizing: border-box;
+                text-decoration: none;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+                background: linear-gradient(0deg, #ddd, #fff);
+                transition: .5s;
+
+                .fab{
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    background: linear-gradient(0deg, #fff, #ddd);
+                    border-radius: 50%;
+                    line-height: calc(60px - 12px);
+                    font-size: 24px;
+                    color: #262626;
+                    transition: .5s;
+                }
+            }
+
+            a:hover{
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+// =========== HOME =========== //
+.sec-home {
+    display: flex;
+    background-color: #ccc;
+    
+}
+
+// ==================== MEDIA QUERIES ==================== //
+/* For small devices */
+@media screen and (max-width: 350px){
+
+}
+  
+/* For medium devices */
+@media screen and (min-width: 568px){
+
+}
+
+@media screen and (min-width: 768px){
+
+}
+
+/* For large devices */
+@media screen and (min-width: 1024px){
+
+}
