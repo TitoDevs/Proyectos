@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dropArea = document.getElementById("dropArea");
     const searchButton = document.getElementById("searchButton");
     const resultsContainer = document.getElementById("resultsContainer");
-    const apiKey = "AIzaSyDPpuhtX2FBcH2o0dMfcFthneAoiSO3jfU"; // Reemplaza con tu propia API key
-    const cx = "74fc7e54ccb0d4fcb"; // Reemplaza con tu propio CX (ID de búsqueda personalizada)
+    const apiKey = "API"; // Reemplaza con tu propia API key
+    const cx = "XS"; // Reemplaza con tu propio CX (ID de búsqueda personalizada)
   
     dropArea.addEventListener("dragover", function (event) {
       event.preventDefault();
