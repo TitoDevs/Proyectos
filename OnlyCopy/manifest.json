@@ -1,0 +1,23 @@
+{
+    "manifest_version": 4,
+    "name": "Mi Portapapeles",
+    "version": "1.0",
+    "description": "Una extensión de portapapeles para Chrome",
+    "permissions": [
+      "clipboardWrite",
+      "clipboardRead",
+      "storage"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+      }
+    }
+  }
+  
