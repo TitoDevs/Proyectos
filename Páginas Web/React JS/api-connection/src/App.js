@@ -1,5 +1,6 @@
 import React from 'react';
 import FlipCard from './assets/flipcard/FlipCard';
+import "./App.css";
 
 const App = () => {
   return (

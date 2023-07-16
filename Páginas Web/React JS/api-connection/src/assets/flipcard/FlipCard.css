@@ -1,21 +1,38 @@
+@font-face {
+    font-family: 'PokemonSolid';
+    src: url('../../fonts/Pokemon_GB.ttf') format('truetype');
+    /* Agrega otras declaraciones de formato para otros formatos de fuente si los tienes */
+  }
+
 .main-container {
-    padding: 10px;
-    background-color: #fef6c4;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-y: hidden;
 }
 
 .header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
-    padding: 80px 0;
+    gap: 20px;
 }
 
 .logo {
-    min-width: 300px;
     max-width: 500px;
-    width: 50%;
-    justify-self: center;
+    width: 100%;
+}
+
+.search-input {
+    max-width: 400px;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .flip-card-container {
@@ -23,61 +40,113 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     justify-items: center;
+    margin-top: 20px;
 }
-
-.search-input {
-    min-width: 300px;
-    max-width: 500px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-  
 
 .flip-card {
     width: 100%;
-    height: 200px;
+    height: 300px;
     perspective: 1000px;
     border-radius: 12px;
 }
-  
+
 .flip-card-inner {
-    position: flex;
+    position: relative;
     width: 100%;
     height: 100%;
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    border: 1px solid #ccc;
     border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-  
+
 .flip-card.flipped .flip-card-inner {
-    transform: rotateY(180deg);
-}
-  
-.flip-card-front,
-.flip-card-back {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 12px;
+    transform: rotateY(-180deg);
 }
 
 .flip-card-front {
-  background-color: #f2f2f2;
-  color: #333;
+    background-color: #fff;
+    color: #333;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip-card-front .pokemon-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-family: 'PokemonSolid', sans-serif;
+}
+
+.flip-card-front .pokemon-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .flip-card-back {
-  background-color: #333;
-  color: #fff;
-  transform: rotateY(180deg);
+    background-color: #B8C76F;
+    color: #fff;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip-card-back .pokemon-name {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+    text-align: center;
+    font-family: 'PokemonSolid', sans-serif;
+}
+
+.pokemon-detail {
+    padding: 0 20px;
+}
+
+.flip-card-back .text-1 {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #1a1a1a;
+    text-align: start;
+    font-family: 'PokemonSolid', sans-serif;
+}
+
+.flip-card-back .text-2 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    color: #1a1a1a;
+    text-align: start;
+    font-family: 'PokemonSolid', sans-serif;
+}
+
+.flip-card-back ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    justify-self: start;
+    text-align: start;
+}
+
+.flip-card-back ul li {
+    color: #1a1a1a;
+    font-size: 12px;
+    font-family: 'PokemonSolid', sans-serif;
+    margin-bottom: 3px;
 }
