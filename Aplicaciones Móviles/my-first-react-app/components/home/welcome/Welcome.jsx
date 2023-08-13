@@ -8,15 +8,15 @@ import {
   FlatList,
 } from "react-native";
 import { useRouter } from "expo-router";
+
 import styles from "./welcome.style";
 import { icons, SIZES } from "../../../constants";
 
 const jobTypes = ["Full-time", "Part-time", "Contractor"];
 
-const Welcome = () => {
+const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
   const router = useRouter();
-  const [searchText, setSearchText] = useState("");
-  const [activeJobType, setACtiveJobType] = useState("Full-time");
+  const [activeJobType, setActiveJobType] = useState("Full-time");
 
   return (
     <View>
@@ -29,32 +29,36 @@ const Welcome = () => {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value={searchText}
-            onChangeText={(text) => setSearchText(text)}
-            placeholder={"What are you looking for?"}
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text)}
+            placeholder='What are you looking for?'
           />
         </View>
-        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
-          <Image 
+
+        <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
+          <Image
             source={icons.search}
-            resizeMode="contain"
-            style={styles.searchBtnImage} />
+            resizeMode='contain'
+            style={styles.searchBtnImage}
+          />
         </TouchableOpacity>
       </View>
+
       <View style={styles.tabsContainer}>
-        <FlatList 
+        <FlatList
           data={jobTypes}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.tab(activeJobType, item)}
               onPress={() => {
-                setACtiveJobType(item)
-                router.push(`/search/${item}`)
-              }}>
+                setActiveJobType(item);
+                router.push(`/search/${item}`);
+              }}
+            >
               <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
             </TouchableOpacity>
           )}
-          keyExtractor={item => item}
+          keyExtractor={(item) => item}
           contentContainerStyle={{ columnGap: SIZES.small }}
           horizontal
         />
