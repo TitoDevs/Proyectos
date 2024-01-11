@@ -1,0 +1,112 @@
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+
+    .container-xxl {
+        width: 100%;
+        max-width: 1400px;
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #181627;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            max-width: 1000px;
+        }
+
+        h2 {
+            font-size: 26px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            max-width: 1000px;
+        }
+
+        h3 {
+            font-size: 22px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            color: #181627;
+            max-width: 1000px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 1px solid #ccc;
+            line-height: 36px;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-weight: 600;
+            max-width: 1000px;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #555555;
+            font-size: 14px;
+            line-height: 25px;
+            font-family: 'Montserrat', sans-serif;
+            max-width: 1000px;
+        }
+
+        ul {
+            padding-left: 20px;
+            max-width: 1000px;
+        }
+
+        li {
+            margin-bottom: 5px;
+            color: #555555;
+            font-size: 14px;
+            line-height: 25px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a {
+            color: #181627;
+            text-decoration: none;
+            transition: color 0.3s;
+            max-width: 1000px;
+
+            &:hover {
+                color: #122d4a;
+            }
+        }
+
+        .container-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            p {
+                font-weight: 500;
+            }
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #fff;
+            overflow: hidden;
+            max-width: 1000px;
+          }
+          
+          th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+          }
+          
+          th {
+            background-color: #f2f2f2;
+          }
+    }
+}

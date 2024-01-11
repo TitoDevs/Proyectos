@@ -1,0 +1,108 @@
+.container {
+    display: flex;
+    justify-content: flex-end;
+    transition: all 0.5s;
+
+    main {
+        padding: 10px;
+        right: 0;
+        top: 0;
+    }
+
+    .sidebar {
+        display: flex;
+        position: fixed;
+        flex-direction: column;
+        gap: 10px;
+        background-color: white;
+        color: #444444;
+        padding: 10px;
+        margin: 10px;
+        height: calc(100vh - 40px);
+        width: 200px;
+        transition: all 0.5s;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        left: 0;
+        top: 0;
+    }
+
+    .top_section {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .subMenu {
+        background-color: #d4d4d4;
+        transition: all 0.5s;
+        border-radius: 0 0 6px 6px;
+    }
+
+    .bottom_section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: auto;
+
+        .separator {
+            width: 100%;
+            height: 1px;
+            background-color: #ddd;
+        }
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .arrow {
+        transition: transform 0.5s;
+    }
+
+    .arrow-open {
+        transition: transform 0.5s;
+        transform: rotate(180deg);
+    }
+
+    .bars {
+        display: flex;
+        font-size: 25px;
+        margin-left: 50px;
+    }
+
+    .link {
+        display: flex;
+        align-items: center;
+        color: #444444;
+        padding: 10px 15px;
+        gap: 15px;
+        transition: all 0.5s;
+        border-radius: 4px;
+    }
+
+    .link:hover {
+        background: #EBEBEB;
+        color: #444444;
+        transition: all 0.3s;
+    }
+
+    .active {
+        background: #EBEBEB;
+        color: #444444;
+        font-weight: 600;
+        transition: font-w 0.5s linear;
+    }
+
+    .icon {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+    }
+
+    .link_text {
+        font-size: 16px;
+    }
+}
