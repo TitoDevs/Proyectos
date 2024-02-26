@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ToDo List</string>
+    <string name="add_task">Añadir Tarea</string>
+    <string name="new_task">Nueva Tarea</string>
+    <string name="task">Tarea</string>
+    <string name="task_title">Título</string>
+    <string name="task_description">Descripción</string>
+    <string name="select_date">Seleccionar fecha</string>
+    <string name="delete_task">Eliminar tarea</string>
+    <string name="task_done">Marcar como hecha</string>
+</resources>
