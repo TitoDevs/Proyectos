@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TestApp</string>
+    <string name="add_new_unit">Añadir nuevo tema</string>
+    <string name="add_new_subject">Añadir nueva asignatura</string>
+    <string name="info">Info</string>
+    <string name="delete_subject">Borrar asignatura</string>
+    <string name="start_test">Iniciar test</string>
+    <string name="question">Pregunta</string>
+    <string name="answers">Respuestas</string>
+    <string name="add_more_answers">Añadir más respuestas</string>
+    <string name="create">Crear</string>
+    <string name="delete_chapter">Borrar tema</string>
+</resources>

@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Docount" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryColorVariant</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secundaryColor</item>
+        <item name="colorSecondaryVariant">@color/secundaryColorVariant</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Docount.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Docount.SplashScreen" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground">@color/grey</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_house_24</item>
+        <item name="postSplashScreenTheme">@style/Theme.Docount</item>
+    </style>
+
+    <style name="Theme.Docount.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Docount.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CustomChipsStyle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="android:textColor">@color/chip_text</item>
+    </style>
+
+    <style name="ButtonSignIn" parent= "Theme.Docount">
+        <item name="backgroundTint">@color/white</item>
+        <item name="round">12sp</item>
+    </style>
+
+    <style name="Etiquetas">
+        <item name="android:background">@drawable/background_label_fab</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+</resources>

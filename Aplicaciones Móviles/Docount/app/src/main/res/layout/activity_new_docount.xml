@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:fitsSystemWindows="true"
+    tools:context=".newdocount.NewDocountActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/white"
+                app:counterEnabled="true"
+                app:counterMaxLength="50"
+                app:errorEnabled="true">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:background="@color/white"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                    android:hint="@string/titulo"
+                    android:inputType="textCapWords"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/white"
+                app:counterEnabled="true"
+                app:counterMaxLength="500">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:background="@color/white"
+                    android:hint="@string/descripcion"
+                    android:inputType="textCapWords"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_divisa"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/bt_chooseCoin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/et_divisa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:background="@color/white"
+                        android:drawableEnd="@drawable/ic_add_24"
+                        android:hint="@string/divisa"
+                        android:inputType="textCapCharacters"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/bt_chooseCoin"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center|end"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_baseline_arrow_drop_down_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/text_input_divisa"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/desc_divisa"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/category"
+                android:textSize="12sp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_travel"
+                    style="@style/CustomChipsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/viaje"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="8dp"
+                    app:chipIcon="@drawable/ic_world_24"
+                    app:chipIconEnabled="true"
+                    app:chipIconSize="18dp"
+                    app:chipStartPadding="8dp"
+                    app:chipStrokeColor="@color/purple_200"
+                    app:chipStrokeWidth="1dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_sharedHouse"
+                    style="@style/CustomChipsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/casacompartida"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="8dp"
+                    app:chipIcon="@drawable/ic_house_24"
+                    app:chipIconEnabled="true"
+                    app:chipIconSize="18dp"
+                    app:chipStartPadding="8dp"
+                    app:chipStrokeColor="@color/purple_200"
+                    app:chipStrokeWidth="1dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_couple"
+                    style="@style/CustomChipsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pareja"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="8dp"
+                    app:chipIcon="@drawable/ic_inlove_24"
+                    app:chipIconEnabled="true"
+                    app:chipIconSize="18dp"
+                    app:chipStartPadding="8dp"
+                    app:chipStrokeColor="@color/purple_200"
+                    app:chipStrokeWidth="1dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/celebration"
+                    style="@style/CustomChipsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/celebracion"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="8dp"
+                    app:chipIcon="@drawable/ic_mic_24"
+                    app:chipIconEnabled="true"
+                    app:chipIconSize="18dp"
+                    app:chipStartPadding="8dp"
+                    app:chipStrokeColor="@color/purple_200"
+                    app:chipStrokeWidth="1dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_project"
+                    style="@style/CustomChipsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/proyecto"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="8dp"
+                    app:chipIcon="@drawable/ic_tools_24"
+                    app:chipIconEnabled="true"
+                    app:chipIconSize="18dp"
+                    app:chipStartPadding="8dp"
+                    app:chipStrokeColor="@color/purple_200"
+                    app:chipStrokeWidth="1dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_others"
+                    style="@style/CustomChipsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/otros"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="8dp"
+                    app:chipIcon="@drawable/ic_led_24"
+                    app:chipIconEnabled="true"
+                    app:chipIconSize="18dp"
+                    app:chipStartPadding="8dp"
+                    app:chipStrokeColor="@color/purple_200"
+                    app:chipStrokeWidth="1dp" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/num_participants"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/grey"
+                android:gravity="center|start"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="@string/participantes" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_my_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="50"
+                    app:errorEnabled="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/bt_addPerson"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/et_newPerson"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:background="@color/white"
+                        android:hint="@string/mi_nombre"
+                        android:inputType="textPersonName"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/bt_addPerson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/añadir"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/text_input_my_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutParticipants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_others_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="50"
+                    app:errorEnabled="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/bt_addPerson2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/et_newPerson2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:background="@color/white"
+                        android:hint="@string/otro_participante"
+                        android:inputType="textPersonName"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/bt_addPerson2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/añadir"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/text_input_others_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/desc_participantes"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

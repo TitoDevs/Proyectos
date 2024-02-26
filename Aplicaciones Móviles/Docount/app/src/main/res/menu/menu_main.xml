@@ -1,0 +1,64 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.worldevs.docount.main.MainActivity">
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_baseline_person_24"/>
+
+    <item
+        android:id="@+id/action_share"
+        android:title="@string/action_share"
+        app:icon="@drawable/ic_share_24"/>
+
+    <item
+        android:id="@+id/action_rate"
+        android:title="@string/action_rate"
+        android:icon="@drawable/ic_star_rate_24"/>
+
+    <item
+        android:id="@+id/action_help"
+        android:title="@string/action_help"
+        android:icon="@drawable/ic_help_24"
+        android:enabled="true">
+        <menu>
+            <item
+                android:id="@+id/action_aboutus"
+                android:title="@string/action_aboutus"/>
+
+            <item
+                android:id="@+id/action_faq"
+                android:title="@string/action_faq"
+                android:icon="@drawable/ic_asked_24"/>
+
+            <item
+                android:id="@+id/action_contactus"
+                android:title="@string/action_contactus"
+                android:icon="@drawable/ic_contact_24"/>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_terms"
+        android:title="@string/action_terms"
+        android:icon="@drawable/ic_baseline_article_24">
+        <menu>
+            <item
+                android:id="@+id/action_termsuses"
+                android:title="@string/action_termsuses"
+                android:icon="@drawable/ic_baseline_article_24"/>
+
+            <item
+                android:id="@+id/action_polity"
+                android:title="@string/action_polity"
+                android:icon="@drawable/ic_baseline_lock_24"/>
+
+            <item
+                android:id="@+id/action_cookies"
+                android:title="@string/action_cookies"/>
+        </menu>
+    </item>
+</menu>
+

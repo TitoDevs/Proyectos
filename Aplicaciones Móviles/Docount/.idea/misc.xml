@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/drawable/background_label_fab.xml" value="0.25" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/drawable/ic_add_24.xml" value="0.2075" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.191" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/activity_account.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/activity_import_docount.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/activity_main.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/activity_new_docount.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/activity_search_coin.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/activity_sign_in.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/cardview_docount.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/cardview_docount_load.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/fragment_balance.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/fragment_bills.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/fragment_first.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/layout/fragment_second.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/menu/menu_new_docount.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/menu/menu_search.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dani Guardado/Desktop/Proyectos/Docount/app/src/main/res/xml/chip_background.xml" value="0.365625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
