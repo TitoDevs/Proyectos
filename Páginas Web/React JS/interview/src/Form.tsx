@@ -43,8 +43,6 @@ const RegistrationForm: React.FC = () => {
   
     return valid;
   };
-  
-
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
