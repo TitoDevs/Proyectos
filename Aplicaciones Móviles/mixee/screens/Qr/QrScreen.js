@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const QrScreen = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -40,24 +41,26 @@ const QrScreen = () => {
             ratio="16:9"
           />
         ) : (
-          <TouchableOpacity style={styles.button} onPress={handleOpenCamera}>
-            <Text style={styles.buttonText}>Abrir Cámara para Escanear QR</Text>
-          </TouchableOpacity>
-        )}
+          <>
+            {qrResults.length > 0 && (
+              <View style={styles.resultContainer}>
+                <Text style={styles.resultText}>Códigos QR Escaneados:</Text>
+                <FlatList
+                  data={qrResults}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <View style={styles.qrItem}>
+                      <Text>{item}</Text>
+                    </View>
+                  )}
+                />
+              </View>
+            )}
 
-        {qrResults.length > 0 && (
-          <View style={styles.resultContainer}>
-            <Text style={styles.resultText}>Códigos QR Escaneados:</Text>
-            <FlatList
-              data={qrResults}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
-                <View style={styles.qrItem}>
-                  <Text>{item}</Text>
-                </View>
-              )}
-            />
-          </View>
+            <TouchableOpacity style={styles.qrButton} onPress={handleOpenCamera}>
+              <MaterialIcons name="qr-code" size={30} color="white" />
+            </TouchableOpacity>
+          </>
         )}
       </View>
     </View>
@@ -73,13 +76,14 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     width: '100%',
-    justifyContent: 'flex-end', // Alinea el contenido en la parte inferior
+    justifyContent: 'flex-end',
   },
   button: {
     backgroundColor: 'tomato',
     padding: 15,
     borderRadius: 5,
-    marginBottom: 20, // Espaciado inferior
+    marginBottom: 20,
+    bottom: 0,
   },
   buttonText: {
     color: 'white',
@@ -90,8 +94,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   resultContainer: {
-    marginTop: 20,
     alignItems: 'center',
+    height: '100%', // Ocupa el height completo
   },
   resultText: {
     fontSize: 18,
@@ -105,6 +109,15 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
   },
+  qrButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: 'tomato',
+    borderRadius: 50,
+    padding: 15,
+  },
 });
+
 
 export default QrScreen;
