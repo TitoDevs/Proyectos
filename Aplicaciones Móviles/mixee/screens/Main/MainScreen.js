@@ -36,7 +36,6 @@ const getTabBarIcon = (route, focused, color, size) => {
 };
 
 const MainScreen = () => {
-  const [isProfileFocused, setProfileFocused] = useState(false);
 
   const CustomHeader = () => {
     const navigation = useNavigation();
@@ -52,14 +51,14 @@ const MainScreen = () => {
           justifyContent: "space-between",
           alignItems: "center",
           paddingHorizontal: 16,
-          paddingTop: 50,
+          paddingTop: 52,
           height: 104,
           backgroundColor: "white",
           borderBottomWidth: 1,
           borderBottomColor: "#e0e0e0",
         }}
       >
-        <Text style={{ fontSize: 24, fontWeight: "bold" }}>Mixee</Text>
+        <Text style={{ fontSize: 22, fontWeight: "bold" }}>Mixee</Text>
         <TouchableOpacity
           onPress={handleProfilePress}
         >
