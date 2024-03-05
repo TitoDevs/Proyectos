@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     alignItems: 'center',
-    height: '100%', // Ocupa el height completo
+    height: '100%',
   },
   resultText: {
     fontSize: 18,

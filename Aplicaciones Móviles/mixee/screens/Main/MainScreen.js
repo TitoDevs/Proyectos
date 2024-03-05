@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -8,7 +8,7 @@ import QrScreen from "../Qr/QrScreen";
 import MapScreen from "../Map/MapScreen";
 import ReservationScreen from "../Reservation/ReservationScreen";
 import MessageScreen from "../Message/MessageScreen";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, SafeAreaView, Platform  } from "react-native";
 
 const getTabBarIcon = (route, focused, color, size) => {
   let iconName;
@@ -36,60 +36,57 @@ const getTabBarIcon = (route, focused, color, size) => {
 };
 
 const MainScreen = () => {
-
   const CustomHeader = () => {
     const navigation = useNavigation();
+    const defaultHeaderHeight = Platform.OS === 'ios' ? 44 : 56;
 
     const handleProfilePress = () => {
-      navigation.navigate('Profile');
+      navigation.navigate("Profile");
     };
 
     return (
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingHorizontal: 16,
-          paddingTop: 52,
-          height: 104,
-          backgroundColor: "white",
-          borderBottomWidth: 1,
-          borderBottomColor: "#e0e0e0",
-        }}
-      >
-        <Text style={{ fontSize: 22, fontWeight: "bold" }}>Mixee</Text>
-        <TouchableOpacity
-          onPress={handleProfilePress}
+      <SafeAreaView style={{ backgroundColor: "white" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: 16,
+            height: defaultHeaderHeight,
+            borderBottomWidth: 1,
+            borderBottomColor: "#e0e0e0",
+          }}
         >
-          <Icon
-            name="person-outline"
-            size={24}
-            color="tomato"
-          />
-        </TouchableOpacity>
-      </View>
+          <Text style={{ fontSize: 22, fontWeight: "bold" }}>Mixee</Text>
+          <TouchableOpacity onPress={handleProfilePress}>
+            <Icon name="person-outline" size={24} color="tomato" />
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     );
   };
 
   const BottomTab = createBottomTabNavigator();
 
   return (
-    <BottomTab.Navigator
-      screenOptions={({ route }) => ({
-        header: () => <CustomHeader />,
-        tabBarIcon: ({ focused, color, size }) =>
-          getTabBarIcon(route, focused, color, size),
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
-      })}
-    >
-      <BottomTab.Screen name="Home" component={HomeScreen} />
-      <BottomTab.Screen name="QR" component={QrScreen} />
-      <BottomTab.Screen name="Map" component={MapScreen} />
-      <BottomTab.Screen name="Reservations" component={ReservationScreen} />
-      <BottomTab.Screen name="Messages" component={MessageScreen} />
-    </BottomTab.Navigator>
+    <>
+      <SafeAreaView style={{ backgroundColor: "white" }}/>
+      <BottomTab.Navigator
+        screenOptions={({ route }) => ({
+          header: () => <CustomHeader />,
+          tabBarIcon: ({ focused, color, size }) =>
+            getTabBarIcon(route, focused, color, size),
+          tabBarActiveTintColor: "tomato",
+          tabBarInactiveTintColor: "gray",
+        })}
+      >
+        <BottomTab.Screen name="Home" component={HomeScreen} />
+        <BottomTab.Screen name="QR" component={QrScreen} />
+        <BottomTab.Screen name="Map" component={MapScreen} />
+        <BottomTab.Screen name="Reservations" component={ReservationScreen} />
+        <BottomTab.Screen name="Messages" component={MessageScreen} />
+      </BottomTab.Navigator>
+    </>
   );
 };
 
