@@ -6,23 +6,11 @@ import ProfileScreen from "./screens/Profile/ProfileScreen";
 import LoginScreen from "./screens/Auth/LoginScreen";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from 'expo-media-library';
+import ChatScreen from "./screens/Chat/ChatScreen";
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [hasCameraPermission, setHasCameraPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-  const [user, setUser] = useState(null);
-
-  // Ejemplo de cómo verificar la autenticación al inicio de la aplicación
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      setUser(false);
-    };
-
-    checkAuthentication();
-  }, []);
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -33,6 +21,8 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        
+      <Stack.Screen name="Chat" component={ChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -4,9 +4,9 @@ import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 const HomeScreen = () => {
   // Ejemplo de publicaciones de comercios
   const posts = [
-    { id: 1, barName: 'Bar La Fiesta', title: '¡Nueva promoción!', content: '2x1 en tragos hoy.', timestamp: 'Hace 2 horas', image: '' },
-    { id: 2, barName: 'Club Nocturno Estelar', title: 'Evento especial', content: 'Noche de música en vivo este viernes.', timestamp: 'Ayer', image: '' },
-    { id: 3, barName: 'Cafetería Delicioso Aroma', title: 'Descuento exclusivo', content: 'Presenta este código y obtén 10% de descuento.', timestamp: 'Hace 3 días', image: '' },
+    { id: 1, barName: 'Bar La Fiesta', title: '¡Nueva promoción!', content: '2x1 en tragos hoy.', timestamp: 'Hace 2 horas', image: 'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg' },
+    { id: 2, barName: 'Club Nocturno Estelar', title: 'Evento especial', content: 'Noche de música en vivo este viernes.', timestamp: 'Ayer', image: 'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg' },
+    { id: 3, barName: 'Cafetería Delicioso Aroma', title: 'Descuento exclusivo', content: 'Presenta este código y obtén 10% de descuento.', timestamp: 'Hace 3 días', image: 'https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg' },
   ];
 
   return (
@@ -17,11 +17,11 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.card}>
+            <Image source={{ uri: item.image }} style={styles.cardImage} />
             <View style={styles.cardHeader}>
               <Text style={styles.barName}>{item.barName}</Text>
               <Text style={styles.timestamp}>{item.timestamp}</Text>
             </View>
-            <Image source={item.image} style={styles.cardImage} />
             <Text style={styles.cardTitle}>{item.title}</Text>
             <Text style={styles.cardContent}>{item.content}</Text>
           </View>
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 10,
-    backgroundColor: '#fff', // Cambiado a un tono más claro
-  },
+    backgroundColor: '#f9f9f9',
+},
   barName: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -67,15 +67,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc'
   },
   cardTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    padding: 10, // Cambiado a un tono más brillante
-  },
-  cardContent: {
     fontSize: 16,
     paddingLeft: 10,
-    paddingBottom: 10,
-    color: '#555', // Cambiado a un tono más oscuro
+    color: '#666',
+  },
+  cardContent: {
+    fontSize: 14,
+    padding: 10,
+    color: '#888',
   },
 });
 

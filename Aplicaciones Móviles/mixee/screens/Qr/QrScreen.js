@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { Camera } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+} from "react-native";
+import { Camera } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const QrScreen = () => {
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -13,13 +19,13 @@ const QrScreen = () => {
     (async () => {
       await MediaLibrary.requestPermissionsAsync();
       const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermission(status === 'granted');
+      setHasCameraPermission(status === "granted");
     })();
   }, []);
 
   const handleScan = (event) => {
-    console.log('QR Code Scanned:', event.data);
-    setQrResults(prevResults => [...prevResults, event.data]);
+    console.log("QR Code Scanned:", event.data);
+    setQrResults((prevResults) => [...prevResults, event.data]);
     setIsCameraOpen(false);
   };
 
@@ -28,7 +34,7 @@ const QrScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={isCameraOpen ? styles.camera : styles.container}>
       <View style={styles.contentContainer}>
         {hasCameraPermission === null ? (
           <Text>Solicitando permisos de cámara...</Text>
@@ -42,23 +48,24 @@ const QrScreen = () => {
           />
         ) : (
           <>
-            {qrResults.length > 0 && (
-              <View style={styles.resultContainer}>
-                <Text style={styles.resultText}>Códigos QR Escaneados:</Text>
-                <FlatList
-                  data={qrResults}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <View style={styles.qrItem}>
-                      <Text>{item}</Text>
-                    </View>
-                  )}
-                />
-              </View>
-            )}
+            <View style={styles.resultContainer}>
+              <Text style={styles.heading}>Códigos QR</Text>
+              <FlatList
+                data={qrResults}
+                keyExtractor={(index) => index.toString()}
+                renderItem={({ item }) => (
+                  <View style={styles.qrItem}>
+                    <Text>{item}</Text>
+                  </View>
+                )}
+              />
+            </View>
 
-            <TouchableOpacity style={styles.qrButton} onPress={handleOpenCamera}>
-              <MaterialIcons name="qr-code" size={30} color="white" />
+            <TouchableOpacity
+              style={styles.qrButton}
+              onPress={handleOpenCamera}
+            >
+              <MaterialIcons name="qr-code" size={34} color="white" />
             </TouchableOpacity>
           </>
         )}
@@ -70,54 +77,54 @@ const QrScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 16,
+    backgroundColor: "#f8f8f8",
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#333",
   },
   contentContainer: {
     flex: 1,
-    width: '100%',
-    justifyContent: 'flex-end',
+    width: "100%",
+    justifyContent: "flex-end",
   },
   button: {
-    backgroundColor: 'tomato',
+    backgroundColor: "tomato",
     padding: 15,
     borderRadius: 5,
     marginBottom: 20,
     bottom: 0,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   camera: {
     flex: 1,
-    width: '100%',
+    width: "100%",
   },
   resultContainer: {
-    alignItems: 'center',
-    height: '100%',
-  },
-  resultText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    alignItems: "center",
+    height: "100%",
   },
   qrItem: {
     padding: 10,
     marginVertical: 5,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
   },
   qrButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     right: 20,
-    backgroundColor: 'tomato',
+    backgroundColor: "tomato",
     borderRadius: 50,
     padding: 15,
   },
 });
-
 
 export default QrScreen;

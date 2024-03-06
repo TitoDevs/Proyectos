@@ -7,8 +7,19 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const ProfileScreen = () => (
+const ProfileScreen = () => {
+
+  const navigation = useNavigation();
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerBackTitle: " ",
+    });
+  }, [navigation]);
+  
+return (
   <SafeAreaView style={{flex: 1}}>
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -56,6 +67,8 @@ const ProfileScreen = () => (
     </View>
   </SafeAreaView>
 );
+} 
+
 
 const styles = StyleSheet.create({
   container: {
