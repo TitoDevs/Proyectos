@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
   Platform,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/FontAwesome"; // Importa el icono que desees
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const ChatScreen = () => {
   const route = useRoute();
@@ -20,7 +20,6 @@ const ChatScreen = () => {
 
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
-  const flatListRef = useRef(null);
 
   const handleSendMessage = () => {
     if (inputText.trim() !== "") {
@@ -39,6 +38,8 @@ const ChatScreen = () => {
     });
   }, [navigation, barName]);
 
+  const reversedMessages = [...messages].reverse();
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView
@@ -48,9 +49,7 @@ const ChatScreen = () => {
       >
         <View style={styles.header}></View>
         <FlatList
-          style={styles.chat}
-          data={messages}
-          contentContainerStyle={{ justifyContent: 'flex-end' }}
+          data={reversedMessages}
           keyExtractor={(item) => item.id.toString()}
           inverted={true}
           renderItem={({ item }) => (
@@ -90,9 +89,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   chat: {
-    flex: 1,
-    backgroundColor: 'black',
-    alignContent: 'flex-end'
+    justifyContent: 'flex-end', 
+    flex: 1
   },
   userMessage: {
     alignSelf: "flex-end",
