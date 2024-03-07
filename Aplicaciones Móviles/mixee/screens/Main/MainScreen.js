@@ -8,7 +8,13 @@ import QrScreen from "../Qr/QrScreen";
 import MapScreen from "../Map/MapScreen";
 import ReservationScreen from "../Reservation/ReservationScreen";
 import MessageScreen from "../Message/MessageScreen";
-import { Text, TouchableOpacity, View, SafeAreaView, Platform  } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  SafeAreaView,
+  Platform,
+} from "react-native";
 
 const getTabBarIcon = (route, focused, color, size) => {
   let iconName;
@@ -38,7 +44,7 @@ const getTabBarIcon = (route, focused, color, size) => {
 const MainScreen = () => {
   const CustomHeader = () => {
     const navigation = useNavigation();
-    const defaultHeaderHeight = Platform.OS === 'ios' ? 44 : 56;
+    const defaultHeaderHeight = Platform.OS === "ios" ? 44 : 56;
 
     const handleProfilePress = () => {
       navigation.navigate("Profile");
@@ -70,7 +76,7 @@ const MainScreen = () => {
 
   return (
     <>
-      <SafeAreaView style={{ backgroundColor: "white" }}/>
+      <SafeAreaView style={{ backgroundColor: "white" }} />
       <BottomTab.Navigator
         screenOptions={({ route }) => ({
           header: () => <CustomHeader />,

@@ -7,37 +7,34 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { Ionicons } from '@expo/vector-icons'; // Importa el ícono desde el paquete correspondiente
+import { Ionicons } from '@expo/vector-icons';
 
 const ReservationScreen = () => {
   // Ejemplo de reservas
   const reservations = [
     {
       id: 1,
-      status: "Confirmada",
+      status: true,
       barName: "Bar La Fiesta",
       date: "2024-03-10",
       time: "19:30",
       partySize: 4,
-      customerName: "Juan Pérez",
     },
     {
       id: 2,
-      status: "Cancelada",
+      status: false,
       barName: "Club Nocturno Estelar",
       date: "2024-04-15",
       time: "20:00",
       partySize: 2,
-      customerName: "María Gómez",
     },
     {
       id: 3,
-      status: "Confirmada",
+      status: true,
       barName: "Cafetería Delicioso Aroma",
       date: "2024-03-20",
       time: "18:45",
       partySize: 6,
-      customerName: "Carlos Rodríguez",
     },
   ];
 
@@ -59,7 +56,7 @@ const ReservationScreen = () => {
   const handleDetailsPress = (reservation) => {
     Alert.alert(
       'Detalles de la Reserva',
-      `Cliente: ${reservation.customerName}\nFecha: ${reservation.date}\nHora: ${reservation.time}\nTamaño de la fiesta: ${reservation.partySize}\nEstado: ${reservation.status}`
+      `Cliente: ${reservation.customerName}\nFecha: ${reservation.date}\nHora: ${reservation.time}\nTamaño de la fiesta: ${reservation.partySize}\nEstado: ${reservation.status ? "Confirmada": "Cancelada"}`
     );
   };
 
@@ -77,7 +74,7 @@ const ReservationScreen = () => {
                   styles.statusContainer,
                   {
                     backgroundColor:
-                      item.status === "Confirmada" ? "#d4edda" : "#eee",
+                      item.status ? "#d4edda" : "#eee",
                   },
                 ]}
               >
@@ -86,11 +83,11 @@ const ReservationScreen = () => {
                     styles.statusText,
                     {
                       color:
-                        item.status === "Confirmada" ? "#28a745" : "#6c757d",
+                        item.status ? "#28a745" : "#6c757d",
                     },
                   ]}
                 >
-                  {item.status}
+                  {item.status ? "Confirmada" : "Cancelada"}
                 </Text>
               </View>
               <View style={styles.infoContainer}>
