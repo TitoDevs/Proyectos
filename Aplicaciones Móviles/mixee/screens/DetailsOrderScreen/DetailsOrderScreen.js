@@ -1,11 +1,26 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Alert,
+  SafeAreaView,
+} from "react-native";
 
 const DetailsOrderScreen = ({ route }) => {
   const { barName, tableNumber, selectedItems } = route.params;
 
   const navigation = useNavigation();
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerBackTitle: " ",
+      title: "Detalles",
+    });
+  }, [navigation]);
 
   const [orderItems, setOrderItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -15,27 +30,33 @@ const DetailsOrderScreen = ({ route }) => {
       // Utiliza un conjunto temporal para filtrar elementos duplicados
       const tempSet = new Set(orderItems.map((item) => item.id));
       const updatedItems = [...orderItems];
-  
+
       selectedItems.forEach((newItem) => {
         if (tempSet.has(newItem.id)) {
           // Si el elemento ya existe, actualiza la cantidad
-          const existingIndex = updatedItems.findIndex((item) => item.id === newItem.id);
-          updatedItems[existingIndex] = { ...updatedItems[existingIndex], quantity: updatedItems[existingIndex].quantity + newItem.quantity };
+          const existingIndex = updatedItems.findIndex(
+            (item) => item.id === newItem.id
+          );
+          updatedItems[existingIndex] = {
+            ...updatedItems[existingIndex],
+            quantity: updatedItems[existingIndex].quantity + newItem.quantity,
+          };
         } else {
           // Si el elemento no existe, agrégalo al completo
           updatedItems.push({ ...newItem });
         }
       });
-  
+
       setOrderItems(updatedItems);
-  
+
       // Calcula el nuevo precio total sumando solo los precios de los items existentes
-      const newTotalPrice = updatedItems.reduce((total, item) => total + item.price * item.quantity, 0);
+      const newTotalPrice = updatedItems.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
       setTotalPrice(newTotalPrice);
     }
   }, [selectedItems]);
-  
-  
 
   const handlePayment = () => {
     // Implementa la lógica para procesar el pago aquí
@@ -44,40 +65,69 @@ const DetailsOrderScreen = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Detalles del Pedido</Text>
-      <View style={styles.detailsContainer}>
-        <Text style={styles.detailText}>Bar: {barName}</Text>
-        <Text style={styles.detailText}>Mesa: {tableNumber}</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.detailText}>{barName}</Text>
+          <Text style={styles.detailText}>Mesa: {tableNumber}</Text>
+          <View style={styles.header}>
+            <View style={styles.detailsHeader}>
 
-        <Text style={styles.subheading}>Pedido</Text>
-        <FlatList
-  data={orderItems}
-  keyExtractor={(item, index) => index.toString()}
-  renderItem={({ item }) => (
-    <View style={styles.orderItem}>
-      <Text>
-        {item.name} - ${item.price} {item.quantity && item.quantity > 1 ? `x${item.quantity}` : ''}
-      </Text>
-    </View>
-  )}
-/>
+            </View>
+            <View style={styles.partyHeader}>
 
+            </View>
+          </View>
 
-        <Text style={styles.totalText}>Total: ${totalPrice}</Text>
+          <Text style={styles.subheading}>Pedido</Text>
+          <View style={styles.detailOrder}>
+            {orderItems.length > 0 ? (
+              <FlatList
+                data={orderItems}
+                keyExtractor={(item) => item.id.toString()}
+                ListHeaderComponent={() => (
+                  <View style={styles.orderHeader}>
+                    <Text style={styles.headerText}>Producto</Text>
+                    <Text style={[styles.headerText, styles.endText]}>Cantidad</Text>
+                    <Text style={[styles.headerText, styles.endText]}>Precio</Text>
+                  </View>
+                )}
+                renderItem={({ item }) => (
+                  <View style={styles.orderItem}>
+                    <Text style={styles.itemText}>{item.name}</Text>
+                    <Text style={[styles.itemText, styles.endText]}>{item.quantity}</Text>
+                    <Text style={[styles.itemText, styles.endText]}>${item.price.toFixed(2)}</Text>
+                  </View>
+                )}
+              />
+            ) : (
+              <Text style={styles.noItemsText}>Aún no has pedido nada.</Text>
+            )}
+          </View>
 
-        <TouchableOpacity style={styles.payButton} onPress={handlePayment}>
-          <Text style={styles.payButtonText}>Realizar Pago</Text>
-        </TouchableOpacity>
+          <Text style={styles.totalText}>Total: ${totalPrice}</Text>
 
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() => navigation.navigate("Menu", { barName, tableNumber, selectedItems })}
-        >
-          <Text style={styles.menuButtonText}>Ver Menú</Text>
-        </TouchableOpacity>
+          <View style={styles.bottomButtons}>
+            <TouchableOpacity
+              style={styles.menuButton}
+              onPress={() =>
+                navigation.navigate("Menu", {
+                  barName,
+                  tableNumber,
+                  selectedItems,
+                })
+              }
+            >
+              <Text style={styles.menuButtonText}>Ver Menú</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.payButton} onPress={handlePayment}>
+              <Text style={styles.payButtonText}>Realizar Pago</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -87,16 +137,21 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#f8f8f8",
   },
-  heading: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "#333",
+  noItemsText: {
+    fontSize: 16,
+    color: "#666",
+    textAlign: "center",
+    justifyContent: "center",
+    marginTop: 10,
+  },
+  detailOrder: {
+    flex: 1,
+    justifyContent: "center",
   },
   detailsContainer: {
     backgroundColor: "#fff",
-    borderRadius: 10,
     padding: 15,
+    flex: 1,
   },
   detailText: {
     fontSize: 16,
@@ -110,11 +165,32 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: "#333",
   },
-  orderItem: {
-    padding: 10,
+  orderHeader: {
+    flexDirection: "row",
+    width: "100%",
+    paddingVertical: 8,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
-    marginBottom: 5,
+  },
+  headerText: {
+    fontWeight: "600",
+    fontSize: 16,
+    width: "33%"
+  },
+  centeredText: {
+    textAlign: "center",
+  },
+  endText: {
+    textAlign: "right"
+  },
+  orderItem: {
+    flexDirection: "row",
+    width: "100%",
+    paddingVertical: 8,
+  },
+  itemText: {
+    fontSize: 16,
+    width: "33%"
   },
   totalText: {
     fontSize: 18,
@@ -122,6 +198,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     color: "#333",
+  },
+  bottomButtons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 16,
+    borderTopWidth: 2,
+    borderTopColor: "#ccc",
+    backgroundColor: "#fff",
   },
   payButton: {
     backgroundColor: "#007bff",
