@@ -8,32 +8,39 @@ import {
   TouchableOpacity,
   Alert,
   SafeAreaView,
+  Modal,
 } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const DetailsOrderScreen = ({ route }) => {
   const { barName, tableNumber, selectedItems } = route.params;
+
+  const [members, setMembers] = useState([
+    { id: 1, name: "Usuario 1", isAdmin: true },
+    { id: 2, name: "Usuario 2", isAdmin: false },
+    { id: 3, name: "Usuario 3", isAdmin: false },
+  ]);
 
   const navigation = useNavigation();
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerBackTitle: " ",
-      title: "Detalles",
+      title: barName,
     });
   }, [navigation]);
 
   const [orderItems, setOrderItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showMembersModal, setShowMembersModal] = useState(false);
 
   useEffect(() => {
     if (selectedItems && selectedItems.length > 0) {
-      // Utiliza un conjunto temporal para filtrar elementos duplicados
       const tempSet = new Set(orderItems.map((item) => item.id));
       const updatedItems = [...orderItems];
 
       selectedItems.forEach((newItem) => {
         if (tempSet.has(newItem.id)) {
-          // Si el elemento ya existe, actualiza la cantidad
           const existingIndex = updatedItems.findIndex(
             (item) => item.id === newItem.id
           );
@@ -42,14 +49,12 @@ const DetailsOrderScreen = ({ route }) => {
             quantity: updatedItems[existingIndex].quantity + newItem.quantity,
           };
         } else {
-          // Si el elemento no existe, agrégalo al completo
           updatedItems.push({ ...newItem });
         }
       });
 
       setOrderItems(updatedItems);
 
-      // Calcula el nuevo precio total sumando solo los precios de los items existentes
       const newTotalPrice = updatedItems.reduce(
         (total, item) => total + item.price * item.quantity,
         0
@@ -59,23 +64,29 @@ const DetailsOrderScreen = ({ route }) => {
   }, [selectedItems]);
 
   const handlePayment = () => {
-    // Implementa la lógica para procesar el pago aquí
-    // Puedes mostrar un mensaje de confirmación o redirigir a una pantalla de pago
     Alert.alert("¡Pedido realizado!", `Total a pagar: $${totalPrice}`);
+  };
+
+  const handleShowMembers = () => {
+    setShowMembersModal(true);
+  };
+
+  const handleCloseMembersModal = () => {
+    setShowMembersModal(false);
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.detailsContainer}>
-          <Text style={styles.detailText}>{barName}</Text>
-          <Text style={styles.detailText}>Mesa: {tableNumber}</Text>
           <View style={styles.header}>
             <View style={styles.detailsHeader}>
-
+              <Text style={styles.detailText}>Mesa: {tableNumber}</Text>
             </View>
             <View style={styles.partyHeader}>
-
+              <TouchableOpacity onPress={handleShowMembers}>
+                <Icon name="users" size={24} color="#007bff" />
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -88,15 +99,23 @@ const DetailsOrderScreen = ({ route }) => {
                 ListHeaderComponent={() => (
                   <View style={styles.orderHeader}>
                     <Text style={styles.headerText}>Producto</Text>
-                    <Text style={[styles.headerText, styles.endText]}>Cantidad</Text>
-                    <Text style={[styles.headerText, styles.endText]}>Precio</Text>
+                    <Text style={[styles.headerText, styles.endText]}>
+                      Cantidad
+                    </Text>
+                    <Text style={[styles.headerText, styles.endText]}>
+                      Precio
+                    </Text>
                   </View>
                 )}
                 renderItem={({ item }) => (
                   <View style={styles.orderItem}>
                     <Text style={styles.itemText}>{item.name}</Text>
-                    <Text style={[styles.itemText, styles.endText]}>{item.quantity}</Text>
-                    <Text style={[styles.itemText, styles.endText]}>${item.price.toFixed(2)}</Text>
+                    <Text style={[styles.itemText, styles.endText]}>
+                      {item.quantity}
+                    </Text>
+                    <Text style={[styles.itemText, styles.endText]}>
+                      ${item.price.toFixed(2)}
+                    </Text>
                   </View>
                 )}
               />
@@ -127,6 +146,29 @@ const DetailsOrderScreen = ({ route }) => {
           </View>
         </View>
       </View>
+
+      <Modal
+        visible={showMembersModal}
+        transparent={true}
+        animationType="slide"
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Integrantes de la mesa</Text>
+            {members.map((member) => (
+              <Text key={member.id} style={styles.modalText}>
+                {member.name} {member.isAdmin ? "(Admin)" : ""}
+              </Text>
+            ))}
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={handleCloseMembersModal}
+            >
+              <Text style={styles.modalCloseButtonText}>Cerrar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -148,10 +190,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  showMembersText: {
+    color: "#007bff",
+    fontSize: 16,
+    marginLeft: 8,
+  },
   detailsContainer: {
     backgroundColor: "#fff",
     padding: 15,
     flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   detailText: {
     fontSize: 16,
@@ -175,13 +226,13 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: "600",
     fontSize: 16,
-    width: "33%"
+    width: "33%",
   },
   centeredText: {
     textAlign: "center",
   },
   endText: {
-    textAlign: "right"
+    textAlign: "right",
   },
   orderItem: {
     flexDirection: "row",
@@ -190,7 +241,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 16,
-    width: "33%"
+    width: "33%",
   },
   totalText: {
     fontSize: 18,
@@ -230,6 +281,39 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  modalCloseButton: {
+    marginTop: 15,
+    padding: 10,
+    backgroundColor: "#007bff",
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  modalCloseButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 
