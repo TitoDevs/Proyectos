@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -9,8 +8,11 @@ import {
   Alert,
   SafeAreaView,
   Modal,
+  TextInput,
+  ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 const DetailsOrderScreen = ({ route }) => {
   const { barName, tableNumber, selectedItems } = route.params;
@@ -33,6 +35,7 @@ const DetailsOrderScreen = ({ route }) => {
   const [orderItems, setOrderItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [showMembersModal, setShowMembersModal] = useState(false);
+  const [newMemberName, setNewMemberName] = useState("");
 
   useEffect(() => {
     if (selectedItems && selectedItems.length > 0) {
@@ -74,6 +77,46 @@ const DetailsOrderScreen = ({ route }) => {
   const handleCloseMembersModal = () => {
     setShowMembersModal(false);
   };
+
+  const handleAddMember = () => {
+    if (newMemberName.trim() !== "") {
+      const newMember = {
+        id: members.length + 1,
+        name: newMemberName,
+        isAdmin: false, // Por defecto, el nuevo miembro no es admin
+      };
+
+      setMembers((prevMembers) => [...prevMembers, newMember]);
+      setNewMemberName("");
+    }
+  };
+
+  const renderMembersList = () => (
+    <ScrollView style={styles.modalScrollView}>
+      {members.map((member) => (
+        <Text key={member.id} style={styles.modalText}>
+          {member.name} {member.isAdmin ? "(Admin)" : ""}
+        </Text>
+      ))}
+    </ScrollView>
+  );
+
+  const renderAddMemberForm = () => (
+    <>
+      <TextInput
+        style={styles.modalInput}
+        placeholder="Nombre del nuevo miembro"
+        value={newMemberName}
+        onChangeText={(text) => setNewMemberName(text)}
+      />
+      <TouchableOpacity
+        style={styles.modalAddButton}
+        onPress={handleAddMember}
+      >
+        <Text style={styles.modalAddButtonText}>Agregar</Text>
+      </TouchableOpacity>
+    </>
+  );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -154,12 +197,14 @@ const DetailsOrderScreen = ({ route }) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Integrantes de la mesa</Text>
-            {members.map((member) => (
-              <Text key={member.id} style={styles.modalText}>
-                {member.name} {member.isAdmin ? "(Admin)" : ""}
-              </Text>
-            ))}
+            <Text style={styles.modalTitle}>
+              {newMemberName !== ""
+                ? "Agregar Miembro"
+                : "Integrantes de la mesa"}
+            </Text>
+
+            {newMemberName === "" ? renderMembersList() : renderAddMemberForm()}
+
             <TouchableOpacity
               style={styles.modalCloseButton}
               onPress={handleCloseMembersModal}
@@ -201,8 +246,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   detailText: {
     fontSize: 16,
@@ -293,6 +338,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     width: "80%",
+    maxHeight: "80%",
   },
   modalTitle: {
     fontSize: 20,
@@ -311,6 +357,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalCloseButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  modalScrollView: {
+    maxHeight: 150,
+    marginBottom: 10,
+  },
+  modalInput: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  modalAddButton: {
+    backgroundColor: "#28a745",
+    borderRadius: 5,
+    padding: 10,
+    marginTop: 10,
+    alignItems: "center",
+  },
+  modalAddButtonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",

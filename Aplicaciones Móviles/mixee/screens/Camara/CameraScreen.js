@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -33,14 +33,22 @@ const CameraScreen = ({ navigation, route }) => {
     }
   };
 
+  // Actualizar las opciones de navegación usando setOptions
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity onPress={handleExit} style={styles.exitButton}>
+          <AntDesign name="close" size={30} color="white" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [handleExit, navigation]);
+
   return (
     <View style={styles.cameraContainer}>
       {hasCameraPermission === true && (
         <Camera style={styles.camera} onBarCodeScanned={handleScan} ratio="16:9" />
       )}
-      <TouchableOpacity style={styles.exitButton} onPress={handleExit}>
-        <AntDesign name="close" size={30} color="white" />
-      </TouchableOpacity>
     </View>
   );
 };
