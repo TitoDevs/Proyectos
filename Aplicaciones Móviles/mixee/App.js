@@ -10,7 +10,6 @@ import DetailsOrderScreen from "./screens/DetailsOrderScreen/DetailsOrderScreen"
 import MenuScreen from "./screens/Menu/MenuScreen";
 
 const Stack = createStackNavigator();
-// TODO Hay que mejorar la lógica.
 export default function App() {
   return (
     <NavigationContainer>
