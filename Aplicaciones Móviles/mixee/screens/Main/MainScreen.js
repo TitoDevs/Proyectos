@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -15,6 +15,13 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
+import * as Font from 'expo-font';
+
+const fetchFonts = async () => {
+  await Font.loadAsync({
+    'custom-font': require('../../assets/fonts/TextLogo.ttf'),
+  });
+};
 
 const getTabBarIcon = (route, focused, color, size) => {
   let iconName;
@@ -42,6 +49,22 @@ const getTabBarIcon = (route, focused, color, size) => {
 };
 
 const MainScreen = () => {
+
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    async function loadFonts() {
+      await fetchFonts();
+      setFontLoaded(true);
+    }
+
+    loadFonts();
+  }, []);
+
+  if(!fontLoaded) {
+    return null;
+  }
+
   const CustomHeader = () => {
     const navigation = useNavigation();
     const defaultHeaderHeight = Platform.OS === "ios" ? 44 : 56;
@@ -59,11 +82,11 @@ const MainScreen = () => {
             alignItems: "center",
             paddingHorizontal: 16,
             height: defaultHeaderHeight,
-            borderBottomWidth: 1,
+            borderBottomWidth: 0.4,
             borderBottomColor: "#e0e0e0",
           }}
         >
-          <Text style={{ fontSize: 22, fontWeight: "bold" }}>Mixee</Text>
+          <Text style={{ fontSize: 26, fontWeight: "100", fontFamily: 'custom-font' }}>Mixee</Text>
           <TouchableOpacity onPress={handleProfilePress}>
             <Icon name="person-outline" size={24} color="tomato" />
           </TouchableOpacity>
@@ -75,10 +98,9 @@ const MainScreen = () => {
   const BottomTab = createBottomTabNavigator();
 
   return (
-    <>
-      <SafeAreaView style={{ backgroundColor: "white" }} />
-      <BottomTab.Navigator
+    <BottomTab.Navigator
         screenOptions={({ route }) => ({
+          style: {flex: 1},
           header: () => <CustomHeader />,
           tabBarIcon: ({ focused, color, size }) =>
             getTabBarIcon(route, focused, color, size),
@@ -92,7 +114,6 @@ const MainScreen = () => {
         <BottomTab.Screen name="Reservations" component={ReservationScreen} />
         <BottomTab.Screen name="Messages" component={MessageScreen} />
       </BottomTab.Navigator>
-    </>
   );
 };
 
