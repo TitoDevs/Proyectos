@@ -2,66 +2,18 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
   Image,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome"; 
+import { menuItems } from "./data.test";
+import { styles } from "./menuscreen.styles";
+import PrimaryButton from "../../components/buttons/PrimaryButton/PrimaryButton";
 
 const MenuScreen = ({ route, navigation }) => {
   const { barName, tableNumber } = route.params;
-  const menuItems = [
-    {
-      id: 1,
-      category: "Carnes",
-      name: "Hamburguesa",
-      price: 10,
-      image:
-        "https://media.istockphoto.com/id/1206323282/es/foto/hamburguesa-jugosa-sobre-fondo-blanco.jpg?s=612x612&w=0&k=20&c=r2mLaVFZxtRk4MeKpdQLtwTkcctyOpGEP-OxPeyo4_c=",
-    },
-    {
-      id: 2,
-      category: "Pizzas",
-      name: "Pizza",
-      price: 12,
-      image:
-        "https://media.istockphoto.com/id/1377372234/es/foto/pizza-con-salami-pimiento-tomates-y-queso-encurtidos-tocino-y-salchichas-sobre-un-fondo-ligero.jpg?s=612x612&w=0&k=20&c=mEKMbrhjixwgGcdrq7Jm-E5wyhBfinRbGbCc8__y4Fs=",
-    },
-    {
-      id: 3,
-      category: "Ensaladas",
-      name: "Ensalada",
-      price: 8,
-      image:
-        "https://cdn0.recetasgratis.net/es/posts/3/2/6/ensalada_de_verduras_variadas_57623_orig.jpg",
-    },
-    {
-      id: 4,
-      category: "Bebidas",
-      name: "Coca-cola",
-      price: 2,
-      image:
-        "https://www.coca-cola.com/content/dam/onexp/gt/es/brands/coca-cola/es_coca-cola_prod_orginal-bottle-600mL_750x750_v1.jpg",
-    },
-    {
-      id: 5,
-      category: "Postres",
-      name: "Pastel de Chocolate",
-      price: 15,
-      image: "https://i.ytimg.com/vi/H7uMpjzyaTU/maxresdefault.jpg",
-    },
-    {
-      id: 6,
-      category: "Postres",
-      name: "Pastel de Chocolate",
-      price: 15,
-      image: "https://i.ytimg.com/vi/H7uMpjzyaTU/maxresdefault.jpg",
-    },
-    // Agrega más ejemplos según sea necesario
-  ];
-
   const [selectedItems, setSelectedItems] = useState([]);
 
   const handleSelectItem = (item, quantity) => {
@@ -154,87 +106,10 @@ const MenuScreen = ({ route, navigation }) => {
             </View>
           ))}
         </ScrollView>
-        <TouchableOpacity
-          style={styles.detailsButton}
-          onPress={handleGoToDetails}
-        >
-          <Text style={styles.detailsButtonText}>Pedir</Text>
-        </TouchableOpacity>
+        <PrimaryButton style={styles.detailsButton} color={styles.detailsButtonText} text={"Pedir"} onPress={handleGoToDetails}/>
       </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: "#f8f8f8",
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "#333",
-  },
-  categoryHeading: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#333",
-  },
-  menuItem: {
-    flexDirection: "row",
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  itemImage: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
-    borderRadius: 5,
-  },
-  itemDetails: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  itemName: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5,
-    color: "#333",
-  },
-  itemInfo: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  itemPrice: {
-    fontSize: 16,
-    color: "#333",
-  },
-  quantityButtons: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  quantityText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginHorizontal: 5,
-  },
-  detailsButton: {
-    backgroundColor: "#007bff",
-    borderRadius: 5,
-    padding: 10,
-    marginTop: 20,
-  },
-  detailsButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-});
 
 export default MenuScreen;

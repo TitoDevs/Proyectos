@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const BarCard = ({ barName, tableNumber, totalFood, isOpen }) => {
+const QrCard = ({ barName, tableNumber, totalFood, isOpen }) => {
   const navigation = useNavigation();
 
   const handleDetailsPress = () => {
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BarCard;
+export default QrCard;

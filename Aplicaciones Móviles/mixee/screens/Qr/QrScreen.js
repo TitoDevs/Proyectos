@@ -2,7 +2,8 @@ import React, { useState, useCallback } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import BarCard from "../../components/cards/BarCard";
+import QrCard from "../../components/cards/QrCard/QrCard";
+import { styles } from "./qrscreen.styles";
 
 const QrScreen = () => {
   const navigation = useNavigation();
@@ -15,7 +16,7 @@ const QrScreen = () => {
   }, []);
 
   const handleOpenCamera = () => {
-    navigation.navigate("Camera", { onScan: handleScan });
+    navigation.navigate("Camera", { onScan: handleScan, key: 'unique_key' });
   };
 
   return (
@@ -24,7 +25,7 @@ const QrScreen = () => {
       <FlatList
         data={qrResults}
         keyExtractor={(item, index) => item + index.toString()}
-        renderItem={({ item }) => <BarCard barName={item} tableNumber={1} totalFood={25} isOpen={true} />} 
+        renderItem={({ item }) => <QrCard barName={item} tableNumber={1} totalFood={25} isOpen={true} />} 
       />
       <TouchableOpacity style={styles.qrButton} onPress={handleOpenCamera}>
         <MaterialIcons name="qr-code" size={34} color="white" />
@@ -32,27 +33,5 @@ const QrScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: "#f8f8f8",
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#333",
-  },
-  qrButton: {
-    position: "absolute",
-    bottom: 20,
-    right: 20,
-    backgroundColor: "tomato",
-    borderRadius: 50,
-    padding: 15,
-  },
-});
 
 export default QrScreen;

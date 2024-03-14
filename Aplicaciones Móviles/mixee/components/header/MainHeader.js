@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
-  StyleSheet,
   View,
   Text,
-  TouchableOpacity,
-  Platform,
+  TouchableOpacity
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { loadFonts } from "../../utils/utils";
+import { styles } from "./mainheader.styles";
 
 const MainHeader = () => {
   const navigation = useNavigation();
-  const defaultHeaderHeight = Platform.OS === "ios" ? 44 : 56;
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadFontsAsync = async () => {
+      await loadFonts();
+      setFontLoaded(true);
+    };
+
+    loadFontsAsync();
+  }, []);
+
+  if(!fontLoaded) {
+    return null;
+  }
 
   const handleProfilePress = () => {
     navigation.navigate("Profile");
@@ -23,31 +36,12 @@ const MainHeader = () => {
       <View style={styles.headerView}>
         <Text style={styles.headerTitle}>Mixee</Text>
         <TouchableOpacity onPress={handleProfilePress}>
-          <Icon name="person-outline" size={24} color="tomato" />
+          <Icon style={styles.headerIcon} name="person-outline" size={24} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  headerContainer: {
-    backgroundColor: "white",
-  },
-  headerView: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    height: Platform.OS === "ios" ? 44 : 56,
-    borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0",
-  },
-  headerTitle: {
-    fontSize: 26,
-    fontWeight: "100",
-    fontFamily: "custom-font",
-  },
-});
 
 export default MainHeader;

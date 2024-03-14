@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   TextInput,
   TouchableOpacity,
   FlatList,
-  StyleSheet,
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import ChatCard from "../../components/cards/ChatCard/ChatCard";
+import { styles } from "./chatscreen.styles";
 
 const ChatScreen = () => {
   const route = useRoute();
@@ -53,11 +53,7 @@ const ChatScreen = () => {
           keyExtractor={(item) => item.id.toString()}
           inverted={true}
           renderItem={({ item }) => (
-            <View
-              style={item.isUser ? styles.userMessage : styles.otherMessage}
-            >
-              <Text>{item.text}</Text>
-            </View>
+            <ChatCard isUser={item.isUser} text={item.text}/>
           )}
         />
         <View style={styles.inputContainer}>
@@ -78,55 +74,5 @@ const ChatScreen = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  header: {
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  chat: {
-    justifyContent: 'flex-end', 
-    flex: 1
-  },
-  userMessage: {
-    alignSelf: "flex-end",
-    backgroundColor: "#DCF8C5",
-    padding: 8,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  otherMessage: {
-    alignSelf: "flex-start",
-    backgroundColor: "#E0E0E0",
-    padding: 8,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 16,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    paddingHorizontal: 12,
-  },
-  sendButton: {
-    marginLeft: 12,
-    padding: 10,
-    backgroundColor: "tomato",
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default ChatScreen;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { AntDesign } from "@expo/vector-icons";
+import { styles } from "./camerascreen.styles";
 
 const CameraScreen = ({ navigation, route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -18,7 +19,7 @@ const CameraScreen = ({ navigation, route }) => {
     (event) => {
       if (!scanned) {
         setScanned(true);
-        if (route.params && route.params.onScan) {
+        if (route.params && route.params.key === 'unique_key') {
           route.params.onScan(event.data);
         }
         navigation.goBack();
@@ -52,25 +53,5 @@ const CameraScreen = ({ navigation, route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  cameraContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  camera: {
-    flex: 1,
-    width: "100%",
-  },
-  exitButton: {
-    position: "absolute",
-    top: 40,
-    right: 20,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    padding: 10,
-    borderRadius: 50,
-  },
-});
 
 export default CameraScreen;

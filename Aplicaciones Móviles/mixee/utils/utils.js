@@ -8,3 +8,18 @@ export const loadFonts = async () => {
     [FONT_NAME]: FONT_PATH,
   });
 };
+
+export const months = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
