@@ -1,15 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
+import { styles } from './loginscreen.styles';
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+// Tu configuración de Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyClnN4xdCsM7dHuanI-o-SZ3XLVfDkDg74",
+  authDomain: "mixee-b086a.firebaseapp.com",
+  databaseURL: "https://mixee-b086a-default-rtdb.firebaseio.com",
+  projectId: "mixee-b086a",
+  storageBucket: "mixee-b086a.appspot.com",
+  messagingSenderId: "47599115603",
+  appId: "1:47599115603:web:3418e639c4fbddac4fd5a6",
+  measurementId: "G-8E76LPZDL0"
+};
+
+// Inicializa Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    navigation.navigate('Main');
+    signInWithEmailAndPassword(email, password)
+      .then(() => {
+        navigation.navigate('Main');
+      })
+      .catch(error => {
+        // Manejo de errores
+        console.log(error);
+      });
   };
 
   const handleGoogleLogin = () => {
@@ -44,41 +69,4 @@ const LoginScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 20
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    width: '100%',
-  },
-  orText: {
-    marginVertical: 10,
-    fontSize: 16,
-  },
-  googleButton: {
-    backgroundColor: '#4285F4',
-    padding: 10,
-    borderRadius: 5,
-  },
-  googleButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-});
-
 export default LoginScreen;
-

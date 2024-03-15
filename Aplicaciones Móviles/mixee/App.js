@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MainScreen from "./screens/Main/MainScreen";
 import ProfileScreen from "./screens/Profile/ProfileScreen";
-import LoginScreen from "./screens/Auth/LoginScreen";
+import LoginScreen from "./screens/Login/LoginScreen";
 import ChatScreen from "./screens/Chat/ChatScreen";
 import CameraScreen from "./screens/Camara/CameraScreen";
 import DetailsOrderScreen from "./screens/DetailsOrderScreen/DetailsOrderScreen";

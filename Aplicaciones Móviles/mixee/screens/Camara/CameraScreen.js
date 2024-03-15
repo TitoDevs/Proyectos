@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { AntDesign } from "@expo/vector-icons";
@@ -15,18 +15,15 @@ const CameraScreen = ({ navigation, route }) => {
     })();
   }, []);
 
-  const handleScan = useCallback(
-    (event) => {
-      if (!scanned) {
-        setScanned(true);
-        if (route.params && route.params.key === 'unique_key') {
-          route.params.onScan(event.data);
-        }
-        navigation.goBack();
+  const handleScan = (event) => {
+    if (!scanned) {
+      setScanned(true);
+      if (route.params && route.params.onScan) {
+        route.params.onScan(event.data);
       }
-    },
-    [navigation, route.params, scanned]
-  );
+      navigation.goBack(); // Usar navigation.goBack() en lugar de navigation.navigate()
+    }
+  };
 
   const handleExit = () => {
     if (!scanned) {
@@ -34,12 +31,11 @@ const CameraScreen = ({ navigation, route }) => {
     }
   };
 
-  // Actualizar las opciones de navegación usando setOptions
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={handleExit} style={styles.exitButton}>
-          <AntDesign name="close" size={30} color="white" />
+          <AntDesign name="close" size={30} color="#ccc" />
         </TouchableOpacity>
       ),
     });
@@ -48,7 +44,11 @@ const CameraScreen = ({ navigation, route }) => {
   return (
     <View style={styles.cameraContainer}>
       {hasCameraPermission === true && (
-        <Camera style={styles.camera} onBarCodeScanned={handleScan} ratio="16:9" />
+        <Camera
+          style={styles.camera}
+          onBarCodeScanned={handleScan}
+          ratio="16:9"
+        />
       )}
     </View>
   );

@@ -3,7 +3,7 @@ import BottomTabNavigator from "../../components/bottomtab/BottomTabNavigator";
 
 const MainScreen = () => {
   return (
-    <BottomTabNavigator/>
+    <BottomTabNavigator />
   );
 };
 

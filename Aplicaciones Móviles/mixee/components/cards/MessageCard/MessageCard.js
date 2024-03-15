@@ -7,7 +7,7 @@ const MessageCard = (props) => {
   const navigation = useNavigation();
 
   const handleCardPress = () => {
-    navigation.navigate('Chat', { barName });
+    navigation.navigate('Chat', { barName: props.barName });
   };
 
   return (
