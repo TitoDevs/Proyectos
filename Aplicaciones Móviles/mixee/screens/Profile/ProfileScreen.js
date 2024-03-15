@@ -1,19 +1,16 @@
-import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  SafeAreaView,
-  Button,
-  Alert, // Importa Alert desde react-native
-} from "react-native";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { View, Text, Image, SafeAreaView, Button, Alert } from "react-native";
 import { styles } from "./profilescreen.styles";
 import MenuButton from "../../components/buttons/MenuButton/MenuButton";
-import { auth } from '../../services/firebase'; // Importa la función de Firebase para cerrar sesión
+import { auth } from "../../services/firebase";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userImage, setUserImage] = useState("");
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -21,31 +18,47 @@ const ProfileScreen = () => {
     });
   }, [navigation]);
 
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      setUserName(currentUser.displayName);
+      setUserEmail(currentUser.email);
+      setUserImage(currentUser.photoURL);
+    }
+
+    const db = getDatabase();
+    const userRef = ref(db, `users/${currentUser ? currentUser.uid : ""}`);
+    onValue(userRef, (snapshot) => {
+      const userData = snapshot.val();
+      if (userData) {
+        setUserImage(userData.photoURL);
+        if (!userName) {
+          setUserName(userData.displayName);
+        }
+      }
+    });
+  }, []);
+
   const handleLogout = () => {
-    Alert.alert(
-      "Cerrar sesión",
-      "¿Estás seguro de que deseas cerrar sesión?",
-      [
-        {
-          text: "Cancelar",
-          style: "cancel",
+    Alert.alert("Cerrar sesión", "¿Estás seguro de que deseas cerrar sesión?", [
+      {
+        text: "Cancelar",
+        style: "cancel",
+      },
+      {
+        text: "Cerrar sesión",
+        onPress: () => {
+          auth
+            .signOut()
+            .then(() => {
+              navigation.navigate("Login");
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
         },
-        {
-          text: "Cerrar sesión",
-          onPress: () => {
-            auth.signOut() // Llama a la función de Firebase para cerrar sesión
-              .then(() => {
-                // Código para redirigir al usuario a la pantalla de inicio de sesión o a otra pantalla de tu aplicación
-                navigation.navigate('Login'); // Por ejemplo, si tienes una pantalla de inicio de sesión llamada 'Login'
-              })
-              .catch((error) => {
-                console.log(error.message);
-                // Manejo de errores si la desconexión falla
-              });
-          },
-        },
-      ]
-    );
+      },
+    ]);
   };
 
   return (
@@ -53,13 +66,16 @@ const ProfileScreen = () => {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Image
-            source={{
-              uri: "https://cdn.autobild.es/sites/navi.axelspringer.es/public/media/image/2016/09/569465-whatsapp-que-tus-contactos-ponen-rana-perfil.jpg?tf=3840x", // Agrega la URL de la imagen de perfil
-            }}
+            source={
+              userImage
+                ? { uri: userImage }
+                : require("../../assets/favicon.png")
+            }
             style={styles.profileImage}
           />
-          <Text style={styles.userName}>Nombre de Usuario</Text>
-          <Text style={styles.userEmail}>correo@ejemplo.com</Text>
+
+          <Text style={styles.userName}>{userName}</Text>
+          <Text style={styles.userEmail}>{userEmail}</Text>
         </View>
         <View style={styles.menuContainer}>
           <MenuButton

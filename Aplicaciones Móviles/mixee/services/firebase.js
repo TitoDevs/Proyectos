@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Importa AsyncStorage
 
+// API Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyClnN4xdCsM7dHuanI-o-SZ3XLVfDkDg74",
     authDomain: "mixee-b086a.firebaseapp.com",
