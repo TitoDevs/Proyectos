@@ -1,39 +1,32 @@
-import React, { useState } from 'react';
-import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { View, Text, Button, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { auth, signInWithEmailAndPassword, onAuthStateChanged } from '../../services/firebase';
 import { styles } from './loginscreen.styles';
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-// Tu configuración de Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyClnN4xdCsM7dHuanI-o-SZ3XLVfDkDg74",
-  authDomain: "mixee-b086a.firebaseapp.com",
-  databaseURL: "https://mixee-b086a-default-rtdb.firebaseio.com",
-  projectId: "mixee-b086a",
-  storageBucket: "mixee-b086a.appspot.com",
-  messagingSenderId: "47599115603",
-  appId: "1:47599115603:web:3418e639c4fbddac4fd5a6",
-  measurementId: "G-8E76LPZDL0"
-};
-
-// Inicializa Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigation.navigate('Main');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const handleLogin = () => {
-    signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         navigation.navigate('Main');
       })
-      .catch(error => {
-        // Manejo de errores
-        console.log(error);
+      .catch((error) => {
+        Alert.alert('Error', 'No se pudo iniciar sesión. Por favor, verifica tu correo electrónico y contraseña.');
+        console.log(error.message)
       });
   };
 

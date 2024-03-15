@@ -4,10 +4,13 @@ import {
   Text,
   Image,
   SafeAreaView,
+  Button,
+  Alert, // Importa Alert desde react-native
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./profilescreen.styles";
 import MenuButton from "../../components/buttons/MenuButton/MenuButton";
+import { auth } from '../../services/firebase'; // Importa la función de Firebase para cerrar sesión
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -17,6 +20,33 @@ const ProfileScreen = () => {
       headerBackTitle: " ",
     });
   }, [navigation]);
+
+  const handleLogout = () => {
+    Alert.alert(
+      "Cerrar sesión",
+      "¿Estás seguro de que deseas cerrar sesión?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Cerrar sesión",
+          onPress: () => {
+            auth.signOut() // Llama a la función de Firebase para cerrar sesión
+              .then(() => {
+                // Código para redirigir al usuario a la pantalla de inicio de sesión o a otra pantalla de tu aplicación
+                navigation.navigate('Login'); // Por ejemplo, si tienes una pantalla de inicio de sesión llamada 'Login'
+              })
+              .catch((error) => {
+                console.log(error.message);
+                // Manejo de errores si la desconexión falla
+              });
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -48,10 +78,7 @@ const ProfileScreen = () => {
             title={"Sobre Mixee"}
             onPress={() => console.log("Sobre Mixee")}
           />
-          <MenuButton
-            title={"Cerrar sesión"}
-            onPress={() => console.log("Cerrar sesión")}
-          />
+          <MenuButton title="Cerrar sesión" onPress={handleLogout} />
         </View>
       </View>
     </SafeAreaView>
