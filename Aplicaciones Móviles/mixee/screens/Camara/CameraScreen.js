@@ -21,7 +21,7 @@ const CameraScreen = ({ navigation, route }) => {
       if (route.params && route.params.onScan) {
         route.params.onScan(event.data);
       }
-      navigation.goBack(); // Usar navigation.goBack() en lugar de navigation.navigate()
+      navigation.goBack();
     }
   };
 
@@ -30,16 +30,6 @@ const CameraScreen = ({ navigation, route }) => {
       navigation.goBack();
     }
   };
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <TouchableOpacity onPress={handleExit} style={styles.exitButton}>
-          <AntDesign name="close" size={30} color="#ccc" />
-        </TouchableOpacity>
-      ),
-    });
-  }, [handleExit, navigation]);
 
   return (
     <View style={styles.cameraContainer}>
@@ -50,6 +40,9 @@ const CameraScreen = ({ navigation, route }) => {
           ratio="16:9"
         />
       )}
+      <TouchableOpacity onPress={handleExit} style={styles.exitButton}>
+          <AntDesign name="close" size={30} color="#ccc" />
+        </TouchableOpacity>
     </View>
   );
 };

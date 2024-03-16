@@ -168,7 +168,7 @@ const DetailsOrderScreen = ({ route }) => {
             )}
           </View>
 
-          <Text style={styles.totalText}>Total: ${totalPrice}</Text>
+          <Text style={styles.totalText}>Total Mesa: ${totalPrice}</Text>
 
           <View style={styles.bottomButtons}>
               <PrimaryButton style={styles.menuButton} text={"Ver Menú"} color={styles.menuButtonText} onPress={() =>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Button, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { auth, signInWithEmailAndPassword, onAuthStateChanged } from '../../services/firebase';
+import { auth, onAuthStateChanged } from '../../services/firebase';
+import { signInWithEmail } from '../../services/authservice';
 import { styles } from './loginscreen.styles';
 
 const LoginScreen = () => {
@@ -20,7 +21,7 @@ const LoginScreen = () => {
   }, []);
 
   const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmail(email, password)
       .then(() => {
         navigation.navigate('Main');
       })

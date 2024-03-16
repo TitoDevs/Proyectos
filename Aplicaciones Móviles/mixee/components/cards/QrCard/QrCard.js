@@ -36,7 +36,7 @@ const QrCard = ({ barName, tableNumber, totalFood, isOpen }) => {
       <Text style={styles.barName}>{barName}</Text>
       <Text style={styles.tableNumber}>Mesa: {tableNumber}</Text>
       <View style={styles.priceContainer}>
-        <Text style={styles.totalFood}>${totalFood}</Text>
+        <Text style={styles.totalFood}>$ {totalFood}</Text>
       </View>
       <TouchableOpacity style={styles.detailsButton} onPress={handleDetailsPress}>
         <Text style={styles.detailsButtonText}>Ver Detalles</Text>

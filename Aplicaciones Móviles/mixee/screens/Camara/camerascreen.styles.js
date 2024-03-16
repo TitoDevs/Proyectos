@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   cameraContainer: {
     flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
+    backgroundColor: "white",
   },
   camera: {
     flex: 1,

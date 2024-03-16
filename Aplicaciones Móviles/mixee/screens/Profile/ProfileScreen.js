@@ -4,6 +4,7 @@ import { View, Text, Image, SafeAreaView, Button, Alert } from "react-native";
 import { styles } from "./profilescreen.styles";
 import MenuButton from "../../components/buttons/MenuButton/MenuButton";
 import { auth } from "../../services/firebase";
+import { signOut } from "../../services/authservice";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 const ProfileScreen = () => {
@@ -27,7 +28,10 @@ const ProfileScreen = () => {
     }
 
     const db = getDatabase();
-    const userRef = ref(db, `users/${currentUser ? currentUser.uid : ""}`);
+    const userRef = ref(
+      db,
+      `users/${currentUser ? currentUser.uid : ""}/personalData`
+    );
     onValue(userRef, (snapshot) => {
       const userData = snapshot.val();
       if (userData) {
@@ -48,8 +52,7 @@ const ProfileScreen = () => {
       {
         text: "Cerrar sesión",
         onPress: () => {
-          auth
-            .signOut()
+          signOut()
             .then(() => {
               navigation.navigate("Login");
             })

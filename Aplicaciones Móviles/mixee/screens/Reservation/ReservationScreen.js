@@ -1,20 +1,20 @@
-import React from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  Alert,
-} from "react-native";
-import { reservations } from "./data.test";
+import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, Alert } from "react-native";
 import ReservationCard from "../../components/cards/ReservationCard/ReservationCard";
 import { styles } from "./reservationscreen.styles";
+import { getMyReservations } from "../../services/databaseservice";
 
 const ReservationScreen = () => {
+  const [reservations, setReservations] = useState([]);
+
+  useEffect(() => {
+    getMyReservations(setReservations);
+  }, []);
 
   const handleDetailsPress = (reservation) => {
     Alert.alert(
       'Detalles de la Reserva',
-      `Cliente: ${reservation.customerName}\nFecha: ${reservation.date}\nHora: ${reservation.time}\nTamaño de la fiesta: ${reservation.partySize}\nEstado: ${reservation.status ? "Confirmada": "Cancelada"}`
+      `Fecha: ${reservation.date}\nHora: ${reservation.time}\nTamaño de la fiesta: ${reservation.partySize}\nEstado: ${reservation.status ? "Confirmada" : "Cancelada"}`
     );
   };
 
@@ -23,9 +23,16 @@ const ReservationScreen = () => {
       <Text style={styles.heading}>Reservas</Text>
       <FlatList
         data={reservations}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.key}
         renderItem={({ item }) => (
-          <ReservationCard status={item.status} barName={item.barName} partySize={item.partySize} date={item.date} handle={() => handleDetailsPress(item)}/>
+          <ReservationCard
+            status={item.status}
+            barName={item.barName}
+            partySize={item.partySize}
+            date={item.date}
+            time={item.time}
+            handle={() => handleDetailsPress(item)}
+          />
         )}
       />
     </View>

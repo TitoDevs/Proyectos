@@ -5,8 +5,10 @@ import { styles } from "./reservationcard.styles";
 import { months } from "../../../utils/utils";
 
 function ReservationCard(props) {
+  const [month, day] = props.date ? props.date.split("-") : ["", ""];
+
   return (
-    <View style={[styles.card]}>
+    <View style={styles.card}>
       <View>
         <View
           style={[
@@ -43,9 +45,9 @@ function ReservationCard(props) {
       </View>
       <View style={styles.dateContainer}>
         <Text style={styles.dateMonth}>
-          {months[parseInt(props.date.split("-")[1], 10) - 1]}
+          {props.date ? months[parseInt(month, 10) - 1] : ""}
         </Text>
-        <Text style={styles.dateDay}>{props.date.split("-")[2]}</Text>
+        <Text style={styles.dateDay}>{day}</Text>
         <Text style={styles.dateTime}>{props.time}</Text>
       </View>
     </View>
