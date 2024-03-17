@@ -99,6 +99,7 @@ const handleScan = (scannedValue) => {
             set(newQrCodeRef, { ...scannedQrCode, timestamp: Date.now() });
           } else {
             console.log("El código QR escaneado no está abierto o no existe.");
+            //TODO Hay que hacer
           }
         } else {
           console.log("No hay códigos QR disponibles.");
