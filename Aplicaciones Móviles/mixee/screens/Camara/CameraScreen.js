@@ -21,7 +21,7 @@ const CameraScreen = ({ navigation, route }) => {
       if (route.params && route.params.onScan) {
         route.params.onScan(event.data);
       }
-      navigation.goBack();
+      navigation.goBack(); // Usar navigation.goBack() en lugar de navigation.navigate()
     }
   };
 

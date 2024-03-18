@@ -18,7 +18,6 @@ const QrScreen = () => {
   const handleOpenCamera = () => {
     navigation.navigate("Camera", {
       onScan: (data) => {
-        console.log(data);
         setScanData(data);
       },
       key: 'unique_key'
