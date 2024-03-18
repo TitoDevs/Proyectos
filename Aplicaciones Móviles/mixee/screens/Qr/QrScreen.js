@@ -1,30 +1,36 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import QrCard from "../../components/cards/QrCard/QrCard";
 import { styles } from "./qrscreen.styles";
-import { handleScan, getMyQrCodes } from "../../services/databaseservice"; // Importa la función handleScan
+import { handleScan, getMyQrCodes } from "../../services/databaseservice";
 
 const QrScreen = () => {
   const navigation = useNavigation();
   const [qrCodes, setQrCodes] = useState([]);
+  const [scanData, setScanData] = useState(null);
 
   useEffect(() => {
     getMyQrCodes(setQrCodes);
   }, []);
 
-  const handleScanQRCode = useCallback((data) => { // Renombra la función handleScan a handleScanQRCode
-    if (data) {
-      console.log(data);
-      handleScan(data);
-      //setQrCodes((prevResults) => [...prevResults, data]);
-    }
-  }, []);
-
   const handleOpenCamera = () => {
-    navigation.navigate("Camera", { onScan: handleScanQRCode, key: 'unique_key' }); // Pasa la función handleScanQRCode como callback al escanear
+    navigation.navigate("Camera", {
+      onScan: (data) => {
+        console.log(data);
+        setScanData(data);
+      },
+      key: 'unique_key'
+    });
   };
+
+  useEffect(() => {
+    if (scanData) {
+      handleScan(scanData, setQrCodes);
+      setScanData(null); // Reiniciar scanData después de ejecutar handleScan
+    }
+  }, [scanData]);
 
   return (
     <View style={styles.container}>
